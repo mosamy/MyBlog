@@ -1,0 +1,20 @@
+I got this error after upgrading Virtualbox on Ubuntu Linux
+
+    Kernel driver not installed (rc=-1908)
+
+    The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing
+
+    '/etc/init.d/vboxdrv setup'
+
+    as root. If it is available in your distribution, you should install the DKMS package first. This package keeps track of Linux kernel changes and recompiles the vboxdrv kernel module if necessary.
+
+Running these 3 commands solved it
+
+
+sudo apt-get install linux-headers-generic build-essential dkms
+sudo apt-get remove virtualbox-dkms
+sudo apt-get install virtualbox-dkms
+
+Here is the link from Ubuntu Forums
+
+http://askubuntu.com/questions/498900/vbox-on-14-04-kernel-driver-not-installed-rc-1908
