@@ -1,0 +1,50 @@
+I was working on a ASP.NET core project and then I needed to add a bower dependency, and as it turned out I hadn't installed bower 
+before. So I Innocently googled how to install bower and then executed this command:
+
+npm install -g bower
+
+I saw a terminal download counter and then a message that I had successfully installed it.
+
+At the end of the article I was told to execute this:
+
+bower -v 
+
+The expected result would be the version of bower, but instead I got this:
+
+module.js:329
+    throw err;
+    ^
+
+Error: Cannot find module './lib/js-yaml.js'
+    at Function.Module._resolveFilename (module.js:327:15)
+    at Function.Module._load (module.js:278:25)
+    at Module.require (module.js:355:17)
+    at require (internal/module.js:13:17)
+    at Object.<anonymous> (/usr/local/lib/node_modules/bower/node_modules/configstore/node_modules/js-yaml/index.js:4:12)
+    at Module._compile (module.js:399:26)
+    at Object.Module._extensions..js (module.js:406:10)
+    at Module.load (module.js:345:32)
+    at Function.Module._load (module.js:302:12)
+    at Module.require (module.js:355:17)
+    at require (internal/module.js:13:17)
+
+I tried :
+
+npm install -g js-yaml
+
+And I got the same install screen and that everything was ok, but alas, executing bower -v produced the same error
+
+Then I decided to get smart, the error said "'./lib/js-yaml.js'"
+
+So I searched for the js-yaml repository which is NOT the same as YAML.js btw, and sure enough it was here
+https://github.com/nodeca/js-yaml
+
+now all I did was download it, and extract the files, then install them in the Bower path where it was expected
+
+/usr/local/lib/node_modules/bower/node_modules/configstore/node_modules/js-yaml/lib
+
+And then it worked!
+
+The video of the error is here
+https://youtu.be/3dF8L4FlicM
+
